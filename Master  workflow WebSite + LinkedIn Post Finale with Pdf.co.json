@@ -1,0 +1,2387 @@
+{
+  "name": "Master  workflow WebSite + LinkedIn Post Finale with Pdf.co",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1OBbEXHg7layr4kT1ghScOMNTBpy8ROYarGqgH4LgwXo",
+          "mode": "list",
+          "cachedResultName": "JD temp",
+          "cachedResultUrl": "https://docs.google.com/document/d/1OBbEXHg7layr4kT1ghScOMNTBpy8ROYarGqgH4LgwXo/edit?usp=drivesdk"
+        },
+        "name": "={{ $json.Role }}+{{ $json.Client }}",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "178ptvsIWFTeUNhpOswYoSl_Auxt1YWZ9",
+          "mode": "list",
+          "cachedResultName": "Job descriptions ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/178ptvsIWFTeUNhpOswYoSl_Auxt1YWZ9"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2896,
+        -496
+      ],
+      "id": "de905d71-c24a-4079-bde8-f8c94c7fb8e4",
+      "name": "Copy file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "bGZyfKjKpafZfN4K",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI",
+          "mode": "list",
+          "cachedResultName": "Job details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Raw JD",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {
+          "dateTimeRenderOption": "SERIAL_NUMBER"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3568,
+        -496
+      ],
+      "id": "540380d0-0dab-4f14-b332-2ea1850ed816",
+      "name": "Google Sheets Trigger",
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "retryOnFail": true,
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "Cv6tyrK0g51ux5kY",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $node[\"Copy file\"].json[\"id\"] }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2672,
+        -496
+      ],
+      "id": "a19107fd-39a3-4af7-a350-d81fceff77d0",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "bGZyfKjKpafZfN4K",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eea5847f-720f-45f2-9e32-89a539c89ed2",
+              "leftValue": "={{ $json['Job Live Status'] }}",
+              "rightValue": "Ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3344,
+        -496
+      ],
+      "id": "52669547-cb2c-4c0e-8d5b-58e83a297396",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "amount": 7
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -3120,
+        -496
+      ],
+      "id": "4c4f8491-0b8e-4bf3-ba20-3e1fdb9f148f",
+      "name": "Wait1",
+      "webhookId": "19d680bf-4c21-452d-bf25-f7adc430642f"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI",
+          "mode": "list",
+          "cachedResultName": "Job details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Raw JD",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Airtable ID": "={{ $json.id }}",
+            "Job ID": "={{ $json.fields['Job Id'] }}"
+          },
+          "matchingColumns": [
+            "Job ID"
+          ],
+          "schema": [
+            {
+              "id": "Role",
+              "displayName": "Role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client",
+              "displayName": "Client",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Job ID",
+              "displayName": "Job ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hours",
+              "displayName": "Hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Salary",
+              "displayName": "Salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Contract Type",
+              "displayName": "Contract Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Language",
+              "displayName": "Language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "End Date",
+              "displayName": "End Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Deadline",
+              "displayName": "Deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Requirements:",
+              "displayName": "Requirements:",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Job Live Status",
+              "displayName": "Job Live Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Airtable ID",
+              "displayName": "Airtable ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn Post",
+              "displayName": "LinkedIn Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Draft",
+              "displayName": "Draft",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LangUsed",
+              "displayName": "LangUsed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ApprovalRequestedAt",
+              "displayName": "ApprovalRequestedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "EditedPost",
+              "displayName": "EditedPost",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Final Post",
+              "displayName": "Final Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PostURL",
+              "displayName": "PostURL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PostedAt",
+              "displayName": "PostedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Image",
+              "displayName": "Image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -208,
+        -496
+      ],
+      "id": "01483e23-95f6-4501-bb6a-abfbfcf95d77",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1pAMhwqigQkbHYqr",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cfcaaaf5-5019-46d6-a01f-dd86b40cd9f4",
+              "leftValue": "={{ $('Google Sheets Trigger').item.json['Job Live Status'] }}",
+              "rightValue": "=Ready",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "350b1a7d-d407-4cac-ac72-63e77bd852c4",
+              "leftValue": "={{ $json['Airtable ID'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        -496
+      ],
+      "id": "87bc4df4-9167-44a8-86f8-a8a98efd8055",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "amrin@talentworth.co",
+        "subject": "=Rjected LinkedIn Post: {{ $('Google Sheets Trigger').item.json.Role }}",
+        "emailType": "text",
+        "message": "=Hi Amrin,\n\nYou have rejected the LinkeIn Post for the {{ $('Google Sheets Trigger').item.json.Role }}. Please have look on google sheet and do Edits if required and we will run the post again.\n\nThanks\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2304,
+        -400
+      ],
+      "id": "c281c17e-0a8b-46e1-af9b-dc9dc1677b9c",
+      "name": "Send a message",
+      "webhookId": "3374c70b-1af2-43ae-afc9-99a78256674c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4sAcUAUJxBXwqbBa",
+          "name": "Amrin@talentworth - Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "amrin@talentworth.co",
+        "subject": "=Review & approve: – LinkedIn Post for {{ $('Google Sheets Trigger').item.json.Role }}",
+        "message": "=<p><strong>Draft ({{$json.LangUsed}})</strong></p>\n<pre style=\"white-space:pre-wrap; font-family:inherit;\">\n{{$json.Draft}}\n</pre>\n\n<hr>\n<p><strong>Approve / Reject</strong></p>\n<p>\n  <a href=\"{{$execution.resumeUrl}}?decision=approve&job={{$item(0).$node['Google Sheets Trigger'].json['Job ID']}}\">Approve ✅</a>\n  &nbsp;|&nbsp;\n  <a href=\"{{$execution.resumeUrl}}?decision=reject&job={{$item(0).$node['Google Sheets Trigger'].json['Job ID']}}\">Reject ❌</a>\n</p>\n\n<p><em>Want edits first?</em> Update “EditedPost” in the sheet, then click Approve.</p>\n<p>Sheet: <a href=\"https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit?gid=0#gid=0\">Open Google Sheet</a></p>\n\n{{$json.LangUsed}}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1408,
+        -496
+      ],
+      "id": "5379fe39-a041-43a8-aa29-5e4e661bb8dc",
+      "name": "Send a message1",
+      "webhookId": "9103d05f-1d7e-4aeb-8c7c-3d4d0cd94163",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4sAcUAUJxBXwqbBa",
+          "name": "Amrin@talentworth - Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7f5787cc-05b1-4843-8ba0-0059f8e23c47",
+              "leftValue": "={{ $json.query.decision }}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "3e4e2199-545d-403c-8641-1ed66708cce2",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1856,
+        -496
+      ],
+      "id": "d99a7949-e4f5-483a-9ffe-b2dca03df55e",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {
+          "maxTokens": 200
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        -64
+      ],
+      "id": "e0f5b78d-3ad4-4e88-a7ce-0ea3c3f5bf3f",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "1qmHkEztK7BrEyrw",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI",
+          "mode": "list",
+          "cachedResultName": "Job details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Raw JD",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Final Post": "={{ $('Update row in sheet2').item.json.Draft }}",
+            "Job ID": "={{ $('Update row in sheet2').item.json['Job ID'] }}"
+          },
+          "matchingColumns": [
+            "Job ID"
+          ],
+          "schema": [
+            {
+              "id": "Role",
+              "displayName": "Role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Client",
+              "displayName": "Client",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Job ID",
+              "displayName": "Job ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hours",
+              "displayName": "Hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Salary",
+              "displayName": "Salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contract Type",
+              "displayName": "Contract Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Language",
+              "displayName": "Language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "End Date",
+              "displayName": "End Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Deadline",
+              "displayName": "Deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Requirements:",
+              "displayName": "Requirements:",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Draft",
+              "displayName": "Draft",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LangUsed",
+              "displayName": "LangUsed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ApprovalRequestedAt",
+              "displayName": "ApprovalRequestedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "EditedPost",
+              "displayName": "EditedPost",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Final Post",
+              "displayName": "Final Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PostURL",
+              "displayName": "PostURL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PostedAt",
+              "displayName": "PostedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn Post Status",
+              "displayName": "LinkedIn Post Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2080,
+        -592
+      ],
+      "id": "b6bcfb65-e3a3-4874-9d16-6c1428af2095",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1pAMhwqigQkbHYqr",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1632,
+        -496
+      ],
+      "id": "f4f7b65c-df7b-464f-84d0-f32fde057a95",
+      "name": "Wait for Approval",
+      "webhookId": "222467dc-fc51-4c3f-8023-efeb5bec3f3d"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        -496
+      ],
+      "id": "5d56b9a5-c936-4a2b-b966-a277c8b18114",
+      "name": "Wait ",
+      "webhookId": "c68520bd-ad59-4a07-80eb-12c00f87b5e1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI",
+          "mode": "list",
+          "cachedResultName": "Job details",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Raw JD",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NnAvhXgLWjlcY57nebH0QoqcI5LqUYH0WUAFiqLxwWI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Job ID": "={{ $('Wait ').item.json['Job ID'] }}",
+            "Draft": "={{$json.output.post}}",
+            "LangUsed": "={{$json.output.lang_used}}",
+            "ApprovalRequestedAt": "={{$now}}"
+          },
+          "matchingColumns": [
+            "Job ID"
+          ],
+          "schema": [
+            {
+              "id": "Role",
+              "displayName": "Role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client",
+              "displayName": "Client",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Job ID",
+              "displayName": "Job ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Hours",
+              "displayName": "Hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Salary",
+              "displayName": "Salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Contract Type",
+              "displayName": "Contract Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Language",
+              "displayName": "Language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "End Date",
+              "displayName": "End Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Deadline",
+              "displayName": "Deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Requirements:",
+              "displayName": "Requirements:",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Job Live Status",
+              "displayName": "Job Live Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Airtable ID",
+              "displayName": "Airtable ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "LinkedIn Post",
+              "displayName": "LinkedIn Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Draft",
+              "displayName": "Draft",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "LangUsed",
+              "displayName": "LangUsed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ApprovalRequestedAt",
+              "displayName": "ApprovalRequestedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EditedPost",
+              "displayName": "EditedPost",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Final Post",
+              "displayName": "Final Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PostURL",
+              "displayName": "PostURL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "PostedAt",
+              "displayName": "PostedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "LinkedIn Post Status",
+              "displayName": "LinkedIn Post Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1184,
+        -496
+      ],
+      "id": "89d68caa-893a-4998-a000-fa75c5064fcf",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1pAMhwqigQkbHYqr",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "199965d4-c817-4977-8caf-41ee4109abed",
+              "leftValue": "={{ $json.query.decision }}",
+              "rightValue": "reject",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2080,
+        -400
+      ],
+      "id": "32d78270-ff06-4df5-ab11-c90043f43043",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "content": "🔹🔹🔹 JOB POSTING FLOW 🔹🔹🔹",
+        "height": 80,
+        "width": 352
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2192,
+        -912
+      ],
+      "typeVersion": 1,
+      "id": "780f7795-8f87-46d5-a625-978fdc6ea6d2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        -496
+      ],
+      "id": "7d9a5b7d-f89e-4245-bf76-4d3e51e72eb2",
+      "name": "Wait2",
+      "webhookId": "3fd2748d-00df-488c-b388-084e92c7ed9e"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write ONE short semi casual LinkedIn #Hiring post in Netherlands or in English depending on a language requirements in 800 -1200 words for our company page, following the System rules.\n\nInputs:\nstart with the hook\nWe are hiring for one of the client of TalentWorth\n- Role: {{ $('Google Sheets Trigger').item.json.Role }}\n- Location:{{ $('Google Sheets Trigger').item.json.Location }}\n- Hours: {{ $('Google Sheets Trigger').item.json.Hours }}\n- Contract type: {{ $('Google Sheets Trigger').item.json['Contract Type'] }}\n- Rate:{{ $('Google Sheets Trigger').item.json.Salary }}\n- Language: {{ $('Google Sheets Trigger').item.json.Language }}\n- APPLY BEFORE:{{ $('Google Sheets Trigger').item.json.Deadline }}\n- refferal Bonus:€1000\n\nFor more details and APPLY :\nhttps://www.talentworth.co/job?id={{ $json['Airtable ID'] }}\n\n\nClosing with Share and follow for more updates.\n\nPlease make sure the language is specifics.",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a recruiting brand copywriter and bilingual copy editor.\n\nYour ONLY task is to return ONE JSON object on a single line, with EXACTLY these two keys:\n{\"post\":\"...\", \"lang_used\":\"en|nl|en+nl\"}\n\nSTRICT OUTPUT RULES:\n- Do not include explanations, notes, markdown, or code fences.\n- Do not repeat or paraphrase these instructions.\n- Output must be valid JSON only.\n\nCONTENT RULES for \"post\":\n- Write in proper format with line breaks and short paragraphs.\n- Start with a hook including the role (example: \"Nieuwe uitdaging: ICT Project Manager 🚀\").\n- Mention employer as:\n  - Dutch: \"voor een van onze klanten bij TalentWorth\"\n  - English: \"for one of our clients at TalentWorth\"\n- Add 2–3 lines summarising the role and requirements.\n- Include quick facts as bullet points (use \"→\"):\n  → Role\n  → Location\n  → Language\n  → Hours\n  → Contract\n  → Rate (If rate is blank, then do not mention)\n- Add CTA: “For more details and APPLY (link) before (date)” → use the provided APPLY link without changes.\n- Closing: catchy and exciting. Example: “Deel deze post en volg onze pagina voor meer updates!!!\n🌟 Ken je iemand? Verwijs ze. Zij krijgen de baan, jij ontvangt €1000. ✨”\n- Use exactly 4 emojis in total (hook, CTA, closing).\n- Never invent details. If input data is missing, omit that line.\n\nLANGUAGE BEHAVIOR:\n- If Language = NL → Entire post must be written only in Dutch. Set \"lang_used\":\"nl\".\n- If Language = EN → Entire post must be written only in English. Set \"lang_used\":\"en\".\n- If Language = NL+EN (or \"Dutch+English\") → Write bilingual with two separate sections:\n   Section 1: \"Dutch\" header + full Dutch post.\n   ---\n   Section 2: \"English\" header + full English post.\n   Set \"lang_used\":\"en+nl\".\n   ❌ Do not mix languages inside one section.\n\nLENGTH:\n- Each section ~800 characters (≤1600 if bilingual).\n\nFINAL REMINDERS:\n- Output one JSON object only.\n- Keys must be exactly \"post\" and \"lang_used\".\n- Never include instructions in the output.\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        720,
+        -496
+      ],
+      "id": "4bf4b12f-2975-4364-8008-64384c7b6fc4",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"post\": { \"type\": \"string\" },\n    \"lang_used\": { \"type\": \"string\", \"enum\": [\"en\", \"nl\", \"en+nl\"] }\n  },\n  \"required\": [\"post\", \"lang_used\"],\n  \"additionalProperties\": false\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        816,
+        -272
+      ],
+      "id": "99685078-ebf8-454c-8ef4-42d44ca7b357",
+      "name": "Structured Post Schema"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {
+          "responseFormat": "json_object",
+          "temperature": 0.5
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        688,
+        -272
+      ],
+      "id": "729dc7f9-b437-4329-9c0a-959cb24150cd",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "1qmHkEztK7BrEyrw",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2000,
+        -496
+      ],
+      "id": "fc516084-2f7e-451c-bec8-fe2c030d636f",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "bGZyfKjKpafZfN4K",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{$json.documentId}}/export?mimeType=application/pdf&tab=tab",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1776,
+        -496
+      ],
+      "id": "b813e240-d910-45dd-a874-a24592d2b8f1",
+      "name": "HTTP Request2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "bGZyfKjKpafZfN4K",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Google Sheets Trigger').item.json.Role }}+{{ $('Google Sheets Trigger').item.json.Client }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "178ptvsIWFTeUNhpOswYoSl_Auxt1YWZ9",
+          "mode": "list",
+          "cachedResultName": "Job descriptions ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/178ptvsIWFTeUNhpOswYoSl_Auxt1YWZ9"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1552,
+        -496
+      ],
+      "id": "afaab9ae-574f-409e-8318-a4bb8da07576",
+      "name": "Upload file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "bGZyfKjKpafZfN4K",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $node[\"Copy file\"].json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "{{Client}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json.Client }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Role}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json.Role }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Hours}}",
+              "replaceText": "={{$node[\"If2\"].json[\"Hours\"].toString()}}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Location}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json.Location }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{contract_type}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json['Contract Type'] }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Start_Date}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json['Start Date'] }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{End_Date}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json['End Date'] }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Salary}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json.Salary }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Deadline}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json.Deadline }}",
+              "matchCase": true
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{Requirements}}",
+              "replaceText": "={{ $('Google Sheets Trigger').item.json['Requirements:'] }}",
+              "matchCase": true
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -2224,
+        -496
+      ],
+      "id": "aa9cf8bd-4a19-467f-899f-0c04fc468873",
+      "name": "Update a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "feG7o0mwbgV70UEi",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -2448,
+        -496
+      ],
+      "id": "8c296baf-b785-4353-9f30-fdf73b8d4cab",
+      "name": "Wait3",
+      "webhookId": "3a3d4d6c-df5b-4272-85da-bf4e8b2748e9"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appSMSddr2LMgs8tb",
+          "mode": "list",
+          "cachedResultName": "Jobs",
+          "cachedResultUrl": "https://airtable.com/appSMSddr2LMgs8tb"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblnzMkaGRFDhvWOU",
+          "mode": "list",
+          "cachedResultName": "Jobs",
+          "cachedResultUrl": "https://airtable.com/appSMSddr2LMgs8tb/tblnzMkaGRFDhvWOU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "JD": "={{ [   {     \"url\": \"https://drive.google.com/uc?export=download&id=\" + $(\"Finale file1\").item.json.id,     \"filename\": $(\"Finale file1\").item.json.name   } ] }}",
+            "Title": "={{ $json.fields.Role }}",
+            "Salary": "={{ $json.fields.Salary }}",
+            "Location": "={{ $json.fields.Location }}",
+            "Languages": "={{ $json.fields.Language }}",
+            "Type": "={{ $json.fields['Contract Type'] }}",
+            "JD URL": "={{ $('Upload file2').item.json.webViewLink }}",
+            "Deadline": "={{ $json.fields.Deadline }}",
+            "Job Id": "={{ $json.fields['Job ID'] }}"
+          },
+          "matchingColumns": [
+            "Job Id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job Id",
+              "displayName": "Job Id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Salary",
+              "displayName": "Salary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Languages",
+              "displayName": "Languages",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Type",
+              "displayName": "Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "JD",
+              "displayName": "JD",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "JD URL",
+              "displayName": "JD URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Deadline",
+              "displayName": "Deadline",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Open",
+                  "value": "Open"
+                },
+                {
+                  "name": "Close",
+                  "value": "Close"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -432,
+        -496
+      ],
+      "id": "5f84b2cc-5966-43db-bd13-864d08ce0c12",
+      "name": "Job Table Update2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "xHKu4MBWYUwI1jFS",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appSMSddr2LMgs8tb",
+          "mode": "list",
+          "cachedResultName": "Jobs",
+          "cachedResultUrl": "https://airtable.com/appSMSddr2LMgs8tb"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbluudXcjQ3yuOsjd",
+          "mode": "list",
+          "cachedResultName": "Raw JD",
+          "cachedResultUrl": "https://airtable.com/appSMSddr2LMgs8tb/tbluudXcjQ3yuOsjd"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Role": "={{ $('Google Sheets Trigger').item.json.Role }}",
+            "Job ID": "={{ $('Google Sheets Trigger').item.json['Job ID'] }}",
+            "Client": "={{ $('Google Sheets Trigger').item.json.Client }}",
+            "Hours": "={{ $('Google Sheets Trigger').item.json.Hours }}",
+            "Salary": "={{ $('Google Sheets Trigger').item.json.Salary }}",
+            "Contract Type": "={{ $('Google Sheets Trigger').item.json['Contract Type'] }}",
+            "Language": "={{ $('Google Sheets Trigger').item.json.Language }}",
+            "Location": "={{ $('Google Sheets Trigger').item.json.Location }}",
+            "Start Date": "={{ $('Google Sheets Trigger').item.json['Start Date'] }}",
+            "End Date": "={{ $('Google Sheets Trigger').item.json['End Date'] }}",
+            "Deadline": "={{ $('Google Sheets Trigger').item.json.Deadline }}",
+            "Requirements:": "={{ $('Google Sheets Trigger').item.json['Requirements:'] }}",
+            "Google doc link": "={{ $json.webViewLink }}",
+            "JD": "={{ [   {     \"url\": \"https://drive.google.com/uc?export=download&id=\" + $(\"Finale file1\").item.json.id,     \"filename\": $(\"Finale file1\").item.json.name   } ] }}"
+          },
+          "matchingColumns": [
+            "id",
+            "Job ID",
+            "Role"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Role",
+              "displayName": "Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Client",
+              "displayName": "Client",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job ID",
+              "displayName": "Job ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Hours",
+              "displayName": "Hours",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Salary",
+              "displayName": "Salary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contract Type",
+              "displayName": "Contract Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Language",
+              "displayName": "Language",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "End Date",
+              "displayName": "End Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Deadline",
+              "displayName": "Deadline",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Requirements:",
+              "displayName": "Requirements:",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Ready",
+                  "value": "Ready"
+                },
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "LinkedIn Post Ready",
+                  "value": "LinkedIn Post Ready"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "JD",
+              "displayName": "JD",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Google doc link",
+              "displayName": "Google doc link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last modified time",
+              "displayName": "Last modified time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -656,
+        -496
+      ],
+      "id": "96340e14-6975-4b7b-85df-8ada9ace4759",
+      "name": "Raw JD Table Update2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "xHKu4MBWYUwI1jFS",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "Delete PDF Pages",
+        "url": "={{ $json.webViewLink }}",
+        "pages": "1",
+        "advancedOptions": {}
+      },
+      "type": "n8n-nodes-pdfco.PDFco Api",
+      "typeVersion": 1,
+      "position": [
+        -1328,
+        -496
+      ],
+      "id": "cfa67b03-a272-4f0c-9de6-809f5a554477",
+      "name": "PDFco Api1",
+      "credentials": {
+        "pdfcoApi": {
+          "id": "KFge6xA3Nup3NJje",
+          "name": "PDF.co account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "=data"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1104,
+        -496
+      ],
+      "id": "2a73912b-bbf2-42db-a830-937badca85aa",
+      "name": "Fetch PDF from PDF.co1"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Google Sheets Trigger').item.json.Role }}+finale",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "178ptvsIWFTeUNhpOswYoSl_Auxt1YWZ9",
+          "mode": "list",
+          "cachedResultName": "Job descriptions ",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/178ptvsIWFTeUNhpOswYoSl_Auxt1YWZ9"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -880,
+        -496
+      ],
+      "id": "a6ea5906-92aa-4ca3-bc0c-c155e44f92c8",
+      "name": "Finale file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "bGZyfKjKpafZfN4K",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Copy file": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Copy file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Wait ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Wait for Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Post Schema",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Approval": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait ": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        []
+      ]
+    },
+    "Structured Post Schema": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Upload file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file2": {
+      "main": [
+        [
+          {
+            "node": "PDFco Api1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document1": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "Update a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Job Table Update2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Raw JD Table Update2": {
+      "main": [
+        [
+          {
+            "node": "Job Table Update2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDFco Api1": {
+      "main": [
+        [
+          {
+            "node": "Fetch PDF from PDF.co1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch PDF from PDF.co1": {
+      "main": [
+        [
+          {
+            "node": "Finale file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finale file1": {
+      "main": [
+        [
+          {
+            "node": "Raw JD Table Update2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9c347178-697b-4e14-a645-d5641c140886",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2a38cea7aeeca5d7e1fe3e3885e9c02e7b8fda3d3b8cb950676a41a2368e0b90"
+  },
+  "id": "4CM5BMDZwvKUeY17",
+  "tags": []
+}
