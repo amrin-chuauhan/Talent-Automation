@@ -1,0 +1,85 @@
+{
+  "name": "TAAI translator 2026",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "translate-test",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2d81d457-b4c5-430d-8c0a-77697eb74f83",
+      "name": "Webhook",
+      "webhookId": "38440a12-6be9-42ef-9e16-4a5556bfc5b5"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are TAAI, a bilingual English-Dutch assistant.\n\nYour task:\n1. Detect whether the input text is English or Dutch.\n2. Translate it naturally into the other language.\n3. Respect the selected mode:\n   - casual = natural, friendly, everyday tone\n   - formal = polite, professional tone\n   - funny = light, playful tone, but still natural\n4. Return structured JSON only.\n\nReturn this exact JSON shape:\n\n{\n  \"translation\": \"full natural translated sentence here\",\n  \"tokens\": [\n    {\n      \"word\": \"word from translated sentence\",\n      \"meaning\": \"short vocabulary meaning in original language\"\n    }\n  ]\n}\n\nRules:\n- Return valid JSON only.\n- Do not add markdown.\n- Do not add explanation outside JSON.\n- The \"translation\" must be a full natural sentence, not a word-by-word literal translation.\n- The \"tokens\" array is only for vocabulary help.\n- Each token should contain:\n  - \"word\": the word from the translated sentence\n  - \"meaning\": a short simple vocabulary meaning in the original language\n- Keep meanings short.\n- Do not include grammar explanations.\n- Preserve punctuation naturally in the translation.\n- Tokens should focus on vocabulary, not grammar teaching.\n\nMode:\n{{$json.body.mode}}\n\nText:\n{{$json.body.text}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        208,
+        0
+      ],
+      "id": "6260b140-6668-4a29-8552-01351b7d467c",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "JUmvpxhtyHizHowV",
+          "name": "OpenAi account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "798406e3-e75d-4481-bd28-8fc847239afe",
+  "meta": {
+    "instanceId": "2a38cea7aeeca5d7e1fe3e3885e9c02e7b8fda3d3b8cb950676a41a2368e0b90"
+  },
+  "id": "JXVKaEZBBLPGIwBZ",
+  "tags": [
+    {
+      "createdAt": "2026-09-15T13:57:03.837Z",
+      "updatedAt": "2026-09-15T13:57:03.837Z",
+      "id": "gT4wZwFLOcxrLrYC",
+      "name": "#Master"
+    }
+  ]
+}
